@@ -1,31 +1,33 @@
-<svg width="360" height="360" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">모리</title>
+  <desc id="desc">초록색 별꼬리를 가진 작은 도마뱀 마스코트</desc>
   <defs>
-    <linearGradient id="body" x1="104" y1="62" x2="267" y2="287" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#5CCBD1"/>
-      <stop offset="1" stop-color="#268EAA"/>
+    <linearGradient id="body" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#73e81a"/>
+      <stop offset="1" stop-color="#45bd00"/>
     </linearGradient>
-    <linearGradient id="tail" x1="260" y1="198" x2="335" y2="133" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFB14A"/>
-      <stop offset="1" stop-color="#FFD783"/>
+    <linearGradient id="belly" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#f3ffd9"/>
+      <stop offset="1" stop-color="#d8f6a7"/>
     </linearGradient>
-    <filter id="shadow" x="46" y="51" width="279" height="267" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#1F5D68" flood-opacity="0.18"/>
-    </filter>
   </defs>
-  <g filter="url(#shadow)">
-    <path d="M99 118C103 74 143 50 185 61C216 69 229 88 238 113C261 120 280 138 287 165C296 201 280 247 247 272C213 298 159 300 118 278C80 258 61 221 67 181C71 151 82 131 99 118Z" fill="url(#body)"/>
-    <path d="M104 128C81 112 73 90 82 72C108 79 124 96 128 116L104 128Z" fill="#70D6D8"/>
-    <path d="M226 112C232 87 251 72 275 72C282 96 271 119 248 132L226 112Z" fill="#3AA7B8"/>
-    <path d="M269 190C298 177 319 157 327 129C345 154 338 192 308 215C292 227 275 230 258 225L269 190Z" fill="url(#tail)"/>
-    <path d="M305 158L324 150L321 171L338 184L316 188L307 208L299 187L277 181L296 168L305 158Z" fill="#FFF4C7"/>
-    <ellipse cx="142" cy="165" rx="18" ry="22" fill="#173536"/>
-    <ellipse cx="217" cy="165" rx="18" ry="22" fill="#173536"/>
-    <ellipse cx="136" cy="158" rx="6" ry="7" fill="white"/>
-    <ellipse cx="211" cy="158" rx="6" ry="7" fill="white"/>
-    <path d="M156 204C170 216 191 217 207 203" stroke="#173536" stroke-width="8" stroke-linecap="round"/>
-    <ellipse cx="119" cy="198" rx="18" ry="9" fill="#83DDE0" fill-opacity="0.65"/>
-    <ellipse cx="236" cy="198" rx="18" ry="9" fill="#83DDE0" fill-opacity="0.65"/>
-    <path d="M92 217C70 221 57 237 59 256C81 258 99 249 109 231L92 217Z" fill="#3BA5B5"/>
-    <path d="M255 220C278 221 294 236 294 255C271 260 251 249 241 232L255 220Z" fill="#247F99"/>
-  </g>
+  <path d="M161 145c24 0 40 11 39 25-1 15-17 25-38 22-13-2-21-9-25-17 7 2 16 1 23-3 7-4 9-10 7-14-2-5-8-8-16-9z" fill="#45bd00"/>
+  <path d="M186 165l7 5-7 5 1 9-9-3-7 6-2-9-9-3 7-7-1-9 9 3 7-6z" fill="#ffc800"/>
+  <ellipse cx="108" cy="122" rx="64" ry="70" fill="url(#body)"/>
+  <path d="M58 82c-16-7-22-20-15-28 8-10 24-5 34 6z" fill="#58cc02"/>
+  <path d="M157 82c16-7 22-20 15-28-8-10-24-5-34 6z" fill="#58cc02"/>
+  <path d="M58 84c-9-5-11-13-7-18 4-5 13-3 20 3z" fill="#9af05c"/>
+  <path d="M157 84c9-5 11-13 7-18-4-5-13-3-20 3z" fill="#9af05c"/>
+  <ellipse cx="108" cy="139" rx="38" ry="42" fill="url(#belly)"/>
+  <ellipse cx="82" cy="105" rx="18" ry="21" fill="#fff"/>
+  <ellipse cx="134" cy="105" rx="18" ry="21" fill="#fff"/>
+  <ellipse cx="86" cy="108" rx="8" ry="11" fill="#3c3c3c"/>
+  <ellipse cx="130" cy="108" rx="8" ry="11" fill="#3c3c3c"/>
+  <circle cx="89" cy="104" r="3" fill="#fff"/>
+  <circle cx="133" cy="104" r="3" fill="#fff"/>
+  <path d="M97 126c7 6 15 6 22 0" fill="none" stroke="#2f7d00" stroke-width="5" stroke-linecap="round"/>
+  <path d="M72 145c-13 3-24 13-27 25" fill="none" stroke="#58cc02" stroke-width="14" stroke-linecap="round"/>
+  <path d="M144 145c13 3 24 13 27 25" fill="none" stroke="#58cc02" stroke-width="14" stroke-linecap="round"/>
+  <path d="M86 184c-5 8-12 12-22 12" fill="none" stroke="#45bd00" stroke-width="15" stroke-linecap="round"/>
+  <path d="M130 184c5 8 12 12 22 12" fill="none" stroke="#45bd00" stroke-width="15" stroke-linecap="round"/>
 </svg>
