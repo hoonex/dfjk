@@ -32,7 +32,7 @@ jobs:
       - name: Commit installed Sloar bundle
         shell: bash
         run: |
-          if git diff --quiet -- AGENTS.md .agents && git diff --cached --quiet -- AGENTS.md .agents; then
+          if ! git status --porcelain -- AGENTS.md .agents | grep -q .; then
             echo "No Sloar installation changes."
             exit 0
           fi
