@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f8faf8" />
+  <meta name="description" content="영어 스피킹 수행평가를 위한 랜덤 5문제 단순 암기 연습" />
+  <title>Recall Rush — Speaking Practice</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <section id="homeScreen" class="screen home-screen" aria-labelledby="homeTitle">
+      <header class="home-topbar">
+        <a class="brand" href="#" aria-label="Recall Rush 홈">
+          <span class="brand-mark" aria-hidden="true">R</span>
+          <span>Recall Rush</span>
+        </a>
+        <div class="stat-row" aria-label="학습 기록">
+          <div class="stat-pill"><span aria-hidden="true">⚡</span><strong id="totalXp">0</strong><span>XP</span></div>
+          <div class="stat-pill"><span aria-hidden="true">🔥</span><strong id="streakDays">0</strong><span>일</span></div>
+        </div>
+      </header>
+
+      <main class="home-main">
+        <div class="hero-copy">
+          <p class="eyebrow">내일 수행 대비 · 11문장</p>
+          <h1 id="homeTitle">질문 앞부분만 보고<br />답을 바로 꺼내는 연습.</h1>
+          <p class="hero-description">실전처럼 랜덤 5문제를 풀고, 틀린 문장은 자동으로 한 번 더 만나게 돼.</p>
+        </div>
+
+        <div class="mascot-stage" aria-label="Recall Rush 마스코트 모리">
+          <img src="assets/mori.svg" alt="파란 별꼬리 마스코트 모리" class="mascot mascot-home" />
+          <div class="speech-bubble"><strong>모리</strong><span>앞부분만 보면 답이 튀어나오게 만들자.</span></div>
+        </div>
+
+        <div class="mode-grid" aria-label="학습 모드 선택">
+          <button class="mode-card primary-mode" data-mode="random" type="button">
+            <span class="mode-icon" aria-hidden="true">5</span>
+            <span class="mode-copy"><strong>실전 랜덤 5</strong><small>시험처럼 11개 중 5개 랜덤</small></span>
+            <span class="chevron" aria-hidden="true">›</span>
+          </button>
+          <button class="mode-card" data-mode="all" type="button">
+            <span class="mode-icon alt" aria-hidden="true">11</span>
+            <span class="mode-copy"><strong>전체 11개 암기</strong><small>처음부터 끝까지 한 번 훑기</small></span>
+            <span class="chevron" aria-hidden="true">›</span>
+          </button>
+        </div>
+
+        <section class="micro-plan" aria-label="추천 암기 순서">
+          <span class="micro-number">1</span><p><strong>질문 앞 4~6단어 확인</strong><br /><small>전체 질문을 해석하려고 멈추지 않기</small></p>
+          <span class="micro-number">2</span><p><strong>답을 통째로 타이핑</strong><br /><small>대소문자·마침표는 신경 안 써도 됨</small></p>
+          <span class="micro-number">3</span><p><strong>틀린 문장만 재도전</strong><br /><small>정확히 맞힐 때까지 연결 강화</small></p>
+        </section>
+      </main>
+    </section>
+
+    <section id="lessonScreen" class="screen lesson-screen is-hidden" aria-live="polite">
+      <header class="lesson-topbar">
+        <button id="exitLesson" class="icon-button" type="button" aria-label="학습 종료">×</button>
+        <div class="progress-track" aria-label="진행률"><div id="progressBar" class="progress-bar"></div></div>
+        <div class="lesson-xp"><span aria-hidden="true">⚡</span><span id="sessionXp">0</span></div>
+      </header>
+
+      <main class="lesson-main">
+        <div class="lesson-heading">
+          <span id="questionCounter" class="question-count">1 / 5</span>
+          <h2>질문 앞부분을 보고 답을 써봐</h2>
+          <p>답 전체가 기억나면 한 번에 입력. 막히면 힌트를 써도 됨.</p>
+        </div>
+
+        <section class="prompt-card" aria-labelledby="questionCue">
+          <div class="prompt-mascot-wrap"><img id="lessonMascot" src="assets/mori.svg" alt="마스코트 모리" class="mascot mascot-lesson" /></div>
+          <div class="prompt-content">
+            <p class="prompt-label">QUESTION CUE</p>
+            <h3 id="questionCue"></h3>
+            <button id="fullQuestionToggle" class="text-button" type="button">전체 질문 보기</button>
+            <p id="fullQuestion" class="full-question is-hidden"></p>
+          </div>
+        </section>
+
+        <form id="answerForm" class="answer-form" autocomplete="off">
+          <label for="answerInput">Your answer</label>
+          <textarea id="answerInput" rows="4" placeholder="영어 답변을 그대로 입력..." spellcheck="false" autocapitalize="off"></textarea>
+          <div id="hintBox" class="hint-box is-hidden"></div>
+          <div class="helper-row">
+            <button id="hintButton" type="button" class="secondary-button">힌트</button>
+            <button id="revealButton" type="button" class="secondary-button danger-lite">정답 보기</button>
+          </div>
+        </form>
+      </main>
+
+      <footer id="lessonFooter" class="lesson-footer">
+        <div id="feedback" class="feedback is-hidden" role="status">
+          <div class="feedback-icon" aria-hidden="true"></div>
+          <div><strong id="feedbackTitle"></strong><p id="feedbackText"></p></div>
+        </div>
+        <button id="checkButton" class="action-button" type="button">확인</button>
+      </footer>
+    </section>
+
+    <section id="resultScreen" class="screen result-screen is-hidden" aria-labelledby="resultTitle">
+      <main class="result-main">
+        <div class="result-mascot-stage"><img src="assets/mori.svg" alt="마스코트 모리" class="mascot mascot-result" /></div>
+        <p class="eyebrow">SESSION COMPLETE</p>
+        <h2 id="resultTitle">한 세션 끝.</h2>
+        <p id="resultMessage" class="result-message"></p>
+
+        <div class="result-stats">
+          <div><span>정확도</span><strong id="accuracyStat">0%</strong></div>
+          <div><span>획득 XP</span><strong id="xpStat">0</strong></div>
+          <div><span>막힌 문장</span><strong id="missedStat">0</strong></div>
+        </div>
+
+        <section id="missedPanel" class="missed-panel is-hidden">
+          <h3>다시 볼 문장</h3>
+          <div id="missedList" class="missed-list"></div>
+        </section>
+
+        <div class="result-actions">
+          <button id="retryMissed" class="action-button is-hidden" type="button">틀린 것만 다시</button>
+          <button id="newRandom" class="secondary-large" type="button">새 랜덤 5</button>
+          <button id="backHome" class="text-button large" type="button">홈으로</button>
+        </div>
+      </main>
+    </section>
+  </div>
+
+  <dialog id="exitDialog" class="confirm-dialog">
+    <div class="dialog-mascot"><img src="assets/mori.svg" alt="" class="mascot mascot-dialog" /></div>
+    <h2>지금 끝낼까?</h2>
+    <p>현재 세션 진행도는 저장되지 않아.</p>
+    <div class="dialog-actions">
+      <button id="keepLearning" class="action-button" type="button">계속하기</button>
+      <button id="confirmExit" class="secondary-large" type="button">나가기</button>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
