@@ -4,124 +4,112 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="질문 앞부분을 보고 영어 스피킹 답변을 외우는 Recall Rush" />
-  <title>Recall Rush — Speaking Practice</title>
+  <meta name="description" content="나만의 문장 세트를 만들고 단계별로 외우는 Recall Rush" />
+  <title>Recall Rush — Learn your lines</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>.quick-practice-card .small-outline-button{grid-column:1/-1;width:100%;justify-content:center}</style>
 </head>
 <body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.2 12 4l9 7.2v8.3a.5.5 0 0 1-.5.5h-5.8v-5.7H9.3V20H3.5a.5.5 0 0 1-.5-.5z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5zM20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5a2.5 2.5 0 0 1 2.5 2.5z"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m5 16.7-.7 3 3-.7L18.6 7.7l-2.3-2.3zM14.9 6.8l2.3 2.3M15.6 4.1l1.1-1.1a1.8 1.8 0 0 1 2.6 0l1.7 1.7a1.8 1.8 0 0 1 0 2.6l-1.1 1.1"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 20V10m7 10V4m7 16v-7"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM19.1 13.7l1.4 1.1-1.7 3-1.7-.7a7.6 7.6 0 0 1-2 1.2l-.3 1.8h-3.5l-.3-1.8a7.6 7.6 0 0 1-2-1.2l-1.7.7-1.7-3 1.4-1.1a7.9 7.9 0 0 1 0-2.4L5.6 10l1.7-3 1.7.7a7.6 7.6 0 0 1 2-1.2l.3-1.8h3.5l.3 1.8a7.6 7.6 0 0 1 2 1.2l1.7-.7 1.7 3-1.4 1.1a7.9 7.9 0 0 1 0 2.4Z"/></symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24"><path d="M13.4 2.8c.8 3-1 4.8-2.3 6.4-1.2 1.4-2 2.6-.8 4.3.8-2 2.4-2.7 3.9-3.8 1.8 1.7 3.1 3.5 3.1 5.8A5.4 5.4 0 0 1 12 21a5.4 5.4 0 0 1-5.4-5.5c0-4.1 3.2-7.2 6.8-12.7Z"/></symbol>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path d="m4 8 3-4h10l3 4-8 12zM4 8h16M8 4l4 16 4-16"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20S4 15.4 4 9.3C4 6.4 6 4.5 8.4 4.5c1.7 0 2.9.8 3.6 2 0 0 1.4-2 3.7-2C18 4.5 20 6.4 20 9.3 20 15.4 12 20 12 20Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3m-11 0h12a1 1 0 0 1 1 1v8H5v-8a1 1 0 0 1 1-1Z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-7 11h5l-1 9 8-12h-5z"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M4 7h3c4 0 6 10 10 10h3m-3-3 3 3-3 3M4 17h3c1.7 0 3-1.8 4.2-4M17 4l3 3-3 3"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.1M4 12h.1M4 18h.1"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><path d="M6 12h.1M12 12h.1M18 12h.1"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  </svg>
+
   <div id="app" class="app-shell">
-    <section id="homeScreen" class="screen home-screen" aria-labelledby="unitTitle">
-      <header class="course-topbar">
-        <a class="brand" href="#" aria-label="Recall Rush 홈">
-          <span class="brand-glyph" aria-hidden="true">R</span>
-          <span class="brand-name">recall rush</span>
-        </a>
-        <div class="top-stats" aria-label="학습 기록">
-          <div class="top-stat flame"><span aria-hidden="true">◆</span><strong id="streakDays">0</strong></div>
-          <div class="top-stat gem"><span aria-hidden="true">⬟</span><strong id="totalXp">0</strong></div>
-          <div class="top-stat heart"><span aria-hidden="true">♥</span><strong>5</strong></div>
-        </div>
-      </header>
+    <section id="homeScreen" class="screen home-screen" aria-labelledby="courseTitle">
+      <aside class="desktop-rail" aria-label="주요 메뉴">
+        <a class="rail-brand" href="#" aria-label="Recall Rush 홈"><span>R</span><strong>recall rush</strong></a>
+        <nav class="rail-nav">
+          <button class="rail-item is-active" data-nav="learn" type="button"><svg><use href="#i-home"/></svg><span>학습</span></button>
+          <button class="rail-item" data-nav="sets" type="button"><svg><use href="#i-book"/></svg><span>문장 세트</span></button>
+          <button class="rail-item" data-nav="practice" type="button"><svg><use href="#i-bolt"/></svg><span>연습</span></button>
+          <button class="rail-item" data-nav="stats" type="button"><svg><use href="#i-chart"/></svg><span>기록</span></button>
+        </nav>
+        <button id="railSettings" class="rail-item rail-bottom" type="button"><svg><use href="#i-gear"/></svg><span>설정</span></button>
+      </aside>
 
-      <main class="path-layout">
-        <section class="learning-column">
-          <div class="unit-banner">
-            <div>
-              <p>UNIT 1</p>
-              <h1 id="unitTitle">Future Technology Speaking</h1>
-              <span>질문 앞부분을 보고 11개 답변을 바로 떠올리기</span>
-            </div>
-            <button id="unitGuide" class="guide-button" type="button" aria-label="학습 방법 보기">?</button>
+      <div class="home-content">
+        <header class="mobile-topbar">
+          <button id="courseSwitcherMobile" class="course-switch-mini" type="button"><span id="mobileCourseInitial">F</span><strong id="mobileCourseTitle">Future Technology</strong><svg><use href="#i-arrow"/></svg></button>
+          <div class="mobile-stats">
+            <span class="stat fire"><svg><use href="#i-fire"/></svg><strong id="streakDaysMobile">0</strong></span>
+            <span class="stat gem"><svg><use href="#i-gem"/></svg><strong id="totalXpMobile">0</strong></span>
           </div>
+        </header>
 
-          <div class="path-stage" aria-label="학습 경로">
-            <div class="path-line" aria-hidden="true"></div>
-
-            <div class="path-row row-left">
-              <button class="lesson-node active current" data-mode="random" type="button" aria-label="실전 랜덤 5 시작">
-                <span class="node-face">★</span>
-                <span class="node-shadow"></span>
-              </button>
-              <div class="node-label current-label"><strong>START</strong><span>랜덤 5문제</span></div>
-            </div>
-
-            <div class="path-row row-right">
-              <button class="lesson-node active" data-mode="all" type="button" aria-label="전체 11문제 시작">
-                <span class="node-face">11</span>
-                <span class="node-shadow"></span>
-              </button>
-            </div>
-
-            <div class="path-row row-left mascot-row">
-              <div class="mascot-bubble"><strong>모리</strong><span>문제 앞부분만 보고 답이 튀어나오게 만들자!</span></div>
-              <img src="assets/mori.svg" alt="Recall Rush 마스코트 모리" class="path-mascot" />
-            </div>
-
-            <div class="path-row row-right">
-              <button class="lesson-node active blue" data-mode="random" type="button" aria-label="실전 랜덤 5 다시 시작">
-                <span class="node-face">▶</span>
-                <span class="node-shadow"></span>
-              </button>
-            </div>
-
-            <div class="chest-row">
-              <div class="milestone-card">
-                <span class="milestone-icon" aria-hidden="true">◆</span>
-                <div><strong>시험 모드</strong><small>11개 중 5개를 랜덤으로 반복</small></div>
-                <button class="mini-cta" data-mode="random" type="button">시작</button>
+        <main class="course-shell">
+          <section class="path-column">
+            <div class="course-header-card">
+              <div class="course-card-main">
+                <div class="course-overline"><span id="courseLabel">COURSE</span><button id="courseMenuButton" class="course-more" type="button" aria-label="코스 메뉴"><svg><use href="#i-more"/></svg></button></div>
+                <h1 id="courseTitle">Future Technology Speaking</h1>
+                <p id="courseDescription">질문 앞부분을 보고 답변을 정확하게 떠올리는 연습</p>
+              </div>
+              <div class="course-card-actions">
+                <button id="openCourseLibrary" class="header-action" type="button"><svg><use href="#i-book"/></svg><span>세트 변경</span></button>
+                <button id="openOrderSettings" class="header-action" type="button"><svg><use href="#i-shuffle"/></svg><span>학습 순서</span></button>
               </div>
             </div>
-
-            <div class="path-row row-left">
-              <button class="lesson-node active gold" data-mode="all" type="button" aria-label="전체 11문제 마스터 시작">
-                <span class="node-face">★</span>
-                <span class="node-shadow"></span>
-              </button>
-            </div>
-
-            <div class="path-row row-right">
-              <button class="lesson-node locked" type="button" disabled aria-label="다음 유닛 잠김">
-                <span class="node-face">◆</span>
-                <span class="node-shadow"></span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <aside class="side-panel" aria-label="오늘의 학습 정보">
-          <section class="side-card daily-card">
-            <div class="side-title"><span>오늘의 목표</span><strong id="masteryPercent">0%</strong></div>
-            <div class="goal-ring" aria-hidden="true"><span id="goalRingValue">0</span></div>
-            <p>한 세션만 끝내도 질문→답 연결이 훨씬 빨라짐.</p>
-            <button class="outline-cta" data-mode="random" type="button">랜덤 5 시작</button>
+            <div id="pathStage" class="path-stage" aria-label="단계별 학습 경로"></div>
           </section>
-          <section class="side-card tip-card">
-            <strong>암기 팁</strong>
-            <p>전체 질문을 번역하지 말고 첫 4~6단어를 답변의 스위치처럼 써.</p>
-          </section>
-        </aside>
-      </main>
 
-      <nav class="bottom-nav" aria-label="하단 메뉴">
-        <button class="nav-item selected" type="button"><span>⌂</span><small>학습</small></button>
-        <button class="nav-item" data-mode="random" type="button"><span>◎</span><small>연습</small></button>
-        <button class="nav-item" data-mode="all" type="button"><span>★</span><small>전체</small></button>
+          <aside class="progress-sidebar">
+            <section class="profile-strip">
+              <div class="stat-chip fire"><svg><use href="#i-fire"/></svg><strong id="streakDays">0</strong><span>연속</span></div>
+              <div class="stat-chip gem"><svg><use href="#i-gem"/></svg><strong id="totalXp">0</strong><span>XP</span></div>
+              <div class="stat-chip heart"><svg><use href="#i-heart"/></svg><strong>5</strong><span>하트</span></div>
+            </section>
+            <section class="sidebar-card daily-goal-card">
+              <div class="card-heading"><div><small>오늘의 목표</small><strong>학습 흐름 유지하기</strong></div><span id="dailyGoalCount">0/2</span></div>
+              <div class="daily-progress"><div id="dailyGoalBar"></div></div>
+              <p id="dailyGoalCopy">레슨 2개를 끝내면 오늘 목표 완료.</p>
+            </section>
+            <section class="sidebar-card course-progress-card">
+              <div class="card-heading"><div><small>코스 진행도</small><strong id="masteryLabel">시작 전</strong></div><span id="masteryPercent">0%</span></div>
+              <div class="mastery-ring"><span id="masteryRingText">0%</span></div>
+              <div class="course-meta-grid"><div><strong id="courseSentenceCount">11</strong><span>문장</span></div><div><strong id="completedLessonCount">0</strong><span>완료 레슨</span></div><div><strong id="weakCount">0</strong><span>약한 문장</span></div></div>
+            </section>
+            <section class="sidebar-card quick-practice-card">
+              <div class="quick-icon"><svg><use href="#i-bolt"/></svg></div>
+              <div><strong>빠른 복습</strong><p>지금까지 배운 문장 중 5개만 빠르게 확인.</p></div>
+              <button id="quickPractice" class="small-outline-button" type="button">시작</button>
+            </section>
+          </aside>
+        </main>
+      </div>
+
+      <nav class="mobile-bottom-nav" aria-label="하단 메뉴">
+        <button class="bottom-nav-item is-active" data-nav="learn" type="button"><svg><use href="#i-home"/></svg><span>학습</span></button>
+        <button class="bottom-nav-item" data-nav="sets" type="button"><svg><use href="#i-book"/></svg><span>세트</span></button>
+        <button class="bottom-nav-item" data-nav="practice" type="button"><svg><use href="#i-bolt"/></svg><span>연습</span></button>
+        <button class="bottom-nav-item" data-nav="stats" type="button"><svg><use href="#i-chart"/></svg><span>기록</span></button>
       </nav>
     </section>
 
     <section id="lessonScreen" class="screen lesson-screen is-hidden" aria-live="polite">
       <header class="lesson-topbar">
         <button id="exitLesson" class="close-button" type="button" aria-label="학습 종료">×</button>
-        <div class="progress-track" aria-label="진행률"><div id="progressBar" class="progress-bar"></div></div>
-        <div class="lesson-heart"><span>♥</span><strong id="lessonLives">5</strong></div>
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div class="lesson-life"><svg><use href="#i-heart"/></svg><strong id="lessonLives">5</strong></div>
       </header>
-
       <main class="lesson-main">
-        <div class="exercise-head">
-          <span id="questionCounter">1 / 5</span>
-          <h2>질문 앞부분을 보고 답을 써봐</h2>
-        </div>
-
+        <div class="lesson-context"><span id="lessonKindLabel">LESSON</span><strong id="lessonTitle">새 문장 배우기</strong><small id="questionCounter">1 / 3</small></div>
+        <h2 id="exerciseInstruction">질문 앞부분을 보고 답을 써봐</h2>
         <section class="character-prompt">
           <img id="lessonMascot" src="assets/mori.svg" alt="마스코트 모리" class="lesson-mascot" />
           <div class="speech-card">
@@ -131,73 +119,79 @@
             <p id="fullQuestion" class="full-question is-hidden"></p>
           </div>
         </section>
-
         <form id="answerForm" class="answer-form" autocomplete="off">
-          <label for="answerInput">영어 답변을 그대로 입력</label>
-          <textarea id="answerInput" rows="4" placeholder="Type your answer in English..." spellcheck="false" autocapitalize="off"></textarea>
+          <label for="answerInput">답변</label>
+          <textarea id="answerInput" rows="4" placeholder="영어 답변을 입력..." spellcheck="false" autocapitalize="off"></textarea>
           <div id="hintBox" class="hint-box is-hidden"></div>
           <div class="helper-row">
-            <button id="hintButton" type="button" class="ghost-button">힌트</button>
+            <button id="hintButton" type="button" class="ghost-button">첫 단어 힌트</button>
             <button id="revealButton" type="button" class="ghost-button">정답 보기</button>
           </div>
         </form>
       </main>
-
       <footer id="lessonFooter" class="lesson-footer">
-        <div id="feedback" class="feedback is-hidden" role="status">
-          <div class="feedback-icon" aria-hidden="true"></div>
-          <div><strong id="feedbackTitle"></strong><p id="feedbackText"></p></div>
-        </div>
+        <div id="feedback" class="feedback is-hidden" role="status"><div class="feedback-icon"></div><div><strong id="feedbackTitle"></strong><p id="feedbackText"></p></div></div>
         <button id="checkButton" class="primary-button" type="button" disabled>확인</button>
       </footer>
     </section>
 
     <section id="resultScreen" class="screen result-screen is-hidden" aria-labelledby="resultTitle">
       <main class="result-main">
-        <img src="assets/mori.svg" alt="마스코트 모리" class="result-mascot" />
+        <div class="result-celebration"><div class="result-rays"></div><img src="assets/mori.svg" alt="마스코트 모리" class="result-mascot" /></div>
         <p class="result-kicker">LESSON COMPLETE</p>
         <h2 id="resultTitle">레슨 완료!</h2>
         <p id="resultMessage" class="result-message"></p>
-
-        <div class="result-stats">
-          <div class="result-stat yellow"><span>획득 XP</span><strong id="xpStat">0</strong></div>
-          <div class="result-stat green"><span>정확도</span><strong id="accuracyStat">0%</strong></div>
-          <div class="result-stat red"><span>막힌 문장</span><strong id="missedStat">0</strong></div>
-        </div>
-
-        <section id="missedPanel" class="missed-panel is-hidden">
-          <h3>다시 볼 문장</h3>
-          <div id="missedList" class="missed-list"></div>
-        </section>
-
-        <div class="result-actions">
-          <button id="retryMissed" class="primary-button is-hidden" type="button">틀린 것만 다시</button>
-          <button id="newRandom" class="secondary-large" type="button">새 랜덤 5</button>
-          <button id="backHome" class="plain-button" type="button">학습 경로로 돌아가기</button>
-        </div>
+        <div class="result-stats"><div class="result-stat xp"><span>XP</span><strong id="xpStat">0</strong></div><div class="result-stat accuracy"><span>정확도</span><strong id="accuracyStat">0%</strong></div><div class="result-stat weak"><span>복습 필요</span><strong id="missedStat">0</strong></div></div>
+        <section id="missedPanel" class="missed-panel is-hidden"><h3>이번에 막힌 문장</h3><div id="missedList" class="missed-list"></div></section>
+        <div class="result-actions"><button id="retryMissed" class="primary-button is-hidden" type="button">틀린 것 다시</button><button id="continuePath" class="primary-button" type="button">다음 단계</button><button id="backHome" class="plain-button" type="button">학습 경로로</button></div>
       </main>
     </section>
   </div>
 
-  <dialog id="exitDialog" class="confirm-dialog">
-    <img src="assets/mori.svg" alt="" class="dialog-mascot" />
-    <h2>레슨을 끝낼까?</h2>
-    <p>지금 나가면 이번 레슨의 진행도는 저장되지 않아.</p>
-    <div class="dialog-actions">
-      <button id="keepLearning" class="primary-button" type="button">계속 학습</button>
-      <button id="confirmExit" class="secondary-large" type="button">나가기</button>
-    </div>
+  <dialog id="lessonSheet" class="sheet-dialog lesson-sheet">
+    <div class="sheet-handle"></div>
+    <div class="lesson-sheet-icon" id="lessonSheetIcon"><svg><use href="#i-star"/></svg></div>
+    <span id="lessonSheetOverline" class="sheet-overline">LESSON 1</span>
+    <h2 id="lessonSheetTitle">새 문장 1–3</h2>
+    <p id="lessonSheetDescription">새 문장을 처음 연결하는 단계.</p>
+    <div class="lesson-sheet-meta"><span><svg><use href="#i-list"/></svg><strong id="lessonSheetCount">3문장</strong></span><span><svg><use href="#i-bolt"/></svg><strong id="lessonSheetXp">30 XP</strong></span></div>
+    <button id="startLessonFromSheet" class="primary-button" type="button">레슨 시작</button>
+    <button id="closeLessonSheet" class="plain-button" type="button">닫기</button>
   </dialog>
 
-  <dialog id="guideDialog" class="confirm-dialog guide-dialog">
-    <h2>이렇게 외우면 됨</h2>
-    <ol>
-      <li>질문의 앞 4~6단어만 본다.</li>
-      <li>답 전체를 기억해서 입력한다.</li>
-      <li>막히면 힌트를 보고, 틀린 문장은 다시 만난다.</li>
-    </ol>
-    <button id="closeGuide" class="primary-button" type="button">확인</button>
+  <dialog id="courseLibraryDialog" class="modal-dialog library-dialog">
+    <div class="modal-header"><div><span class="modal-eyebrow">MY COURSES</span><h2>문장 세트</h2><p>공부할 문장 묶음을 만들고 전환할 수 있음.</p></div><button class="modal-close" data-close-dialog type="button">×</button></div>
+    <div id="courseList" class="course-list"></div>
+    <button id="createCourseButton" class="primary-button full" type="button"><svg><use href="#i-plus"/></svg> 새 문장 세트 만들기</button>
   </dialog>
+
+  <dialog id="courseEditorDialog" class="modal-dialog editor-dialog">
+    <div class="modal-header"><div><span class="modal-eyebrow">COURSE EDITOR</span><h2 id="editorHeading">문장 세트 만들기</h2><p>문장 순서는 드래그 대신 ↑ ↓ 버튼으로 정확하게 정리할 수 있음.</p></div><button class="modal-close" data-close-dialog type="button">×</button></div>
+    <div class="editor-meta-grid"><label>세트 이름<input id="courseTitleInput" type="text" maxlength="70" placeholder="예: 영어 스피킹 수행" /></label><label>설명<input id="courseDescriptionInput" type="text" maxlength="120" placeholder="예: Q1~Q11 답변 암기" /></label></div>
+    <div class="editor-toolbar"><div class="editor-tabs"><button class="editor-tab is-active" data-editor-tab="cards" type="button">문장별 편집</button><button class="editor-tab" data-editor-tab="bulk" type="button">빠른 입력</button></div><button id="addSentenceButton" class="small-outline-button" type="button"><svg><use href="#i-plus"/></svg> 문장 추가</button></div>
+    <div id="cardsEditorPanel" class="editor-panel"><div id="sentenceEditorList" class="sentence-editor-list"></div></div>
+    <div id="bulkEditorPanel" class="editor-panel is-hidden"><div class="format-guide"><strong>빠른 입력 형식</strong><code>Q: 전체 질문
+CUE: 질문 앞부분...
+A: 외울 답변
+---</code><span>`---`로 문장을 구분. CUE를 비우면 질문 앞부분을 자동 생성함.</span></div><textarea id="bulkInput" rows="15" placeholder="Q: What ...?&#10;CUE: What specific future technology...&#10;A: I am interested in...&#10;---"></textarea><button id="applyBulkButton" class="secondary-button" type="button">빠른 입력을 문장 목록에 적용</button></div>
+    <div id="editorError" class="editor-error is-hidden"></div>
+    <div class="modal-actions"><button id="deleteCourseButton" class="danger-button is-hidden" type="button">세트 삭제</button><span></span><button id="cancelCourseEdit" class="secondary-button" type="button">취소</button><button id="saveCourseButton" class="primary-button" type="button">저장</button></div>
+  </dialog>
+
+  <dialog id="orderDialog" class="modal-dialog settings-dialog">
+    <div class="modal-header"><div><span class="modal-eyebrow">STUDY SETTINGS</span><h2>학습 순서</h2><p>단계 안에서 문장을 어떤 순서로 보여줄지 정함.</p></div><button class="modal-close" data-close-dialog type="button">×</button></div>
+    <fieldset class="choice-grid"><legend>문장 순서</legend><label class="choice-card"><input type="radio" name="orderMode" value="original" checked><span class="choice-icon"><svg><use href="#i-list"/></svg></span><span><strong>원래 순서</strong><small>작성한 순서를 그대로</small></span></label><label class="choice-card"><input type="radio" name="orderMode" value="random"><span class="choice-icon"><svg><use href="#i-shuffle"/></svg></span><span><strong>랜덤</strong><small>매 레슨마다 섞어서</small></span></label><label class="choice-card"><input type="radio" name="orderMode" value="weak"><span class="choice-icon"><svg><use href="#i-bolt"/></svg></span><span><strong>약한 문장 먼저</strong><small>최근 틀린 문장을 앞에</small></span></label></fieldset>
+    <fieldset class="choice-grid compact"><legend>한 번에 배우는 새 문장</legend><label class="segment-choice"><input type="radio" name="chunkSize" value="2"><span>2개</span></label><label class="segment-choice"><input type="radio" name="chunkSize" value="3" checked><span>3개</span></label><label class="segment-choice"><input type="radio" name="chunkSize" value="4"><span>4개</span></label></fieldset>
+    <button id="saveOrderSettings" class="primary-button full" type="button">적용하고 경로 다시 만들기</button>
+  </dialog>
+
+  <dialog id="statsDialog" class="modal-dialog stats-dialog">
+    <div class="modal-header"><div><span class="modal-eyebrow">PROGRESS</span><h2>학습 기록</h2><p id="statsCourseName"></p></div><button class="modal-close" data-close-dialog type="button">×</button></div>
+    <div class="stats-summary"><div><span>총 XP</span><strong id="statsXp">0</strong></div><div><span>완료 레슨</span><strong id="statsLessons">0</strong></div><div><span>약한 문장</span><strong id="statsWeak">0</strong></div></div>
+    <h3>문장별 상태</h3><div id="sentenceStatsList" class="sentence-stats-list"></div>
+  </dialog>
+
+  <dialog id="exitDialog" class="confirm-dialog"><img src="assets/mori.svg" alt="" class="dialog-mascot" /><h2>레슨을 끝낼까?</h2><p>이번 레슨에서 아직 저장되지 않은 진행은 사라짐.</p><div class="dialog-actions"><button id="keepLearning" class="primary-button" type="button">계속 학습</button><button id="confirmExit" class="secondary-button" type="button">나가기</button></div></dialog>
 
   <script src="app.js"></script>
 </body>
