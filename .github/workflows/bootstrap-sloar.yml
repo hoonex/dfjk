@@ -1,0 +1,43 @@
+name: Bootstrap Sloar Chat Coder
+
+on:
+  push:
+    paths:
+      - '.github/workflows/bootstrap-sloar.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install canonical Sloar 0.9.1
+        shell: bash
+        run: |
+          if [ -f .agents/skills/sloar-chat-coder/SKILL.md ]; then
+            echo "Sloar already installed; nothing to do."
+            exit 0
+          fi
+          git clone https://github.com/hoonex/sloar-chat-coder.git /tmp/sloar-chat-coder
+          git -C /tmp/sloar-chat-coder checkout d3c125f3e3b66a41e76f1addc1e5f34f6d6d84c3
+          python3 /tmp/sloar-chat-coder/.agents/skills/sloar-chat-coder/scripts/install.py --target "$GITHUB_WORKSPACE"
+
+      - name: Commit installed Sloar bundle
+        shell: bash
+        run: |
+          if git diff --quiet -- AGENTS.md .agents && git diff --cached --quiet -- AGENTS.md .agents; then
+            echo "No Sloar installation changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add AGENTS.md .agents
+          git commit -m "chore: install Sloar Chat Coder 0.9.1 [sloar-installed]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

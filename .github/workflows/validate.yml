@@ -1,0 +1,37 @@
+name: Validate Recall Rush
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: node --check app.js
+      - name: Verify learning content and assets
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          app = Path('app.js').read_text(encoding='utf-8')
+          html = Path('index.html').read_text(encoding='utf-8')
+          assert app.count('cue:') == 11, 'expected 11 question cues'
+          assert app.count('answer:') == 11, 'expected 11 answers'
+          assert 'assets/mori.svg' in html, 'mascot asset is not referenced'
+          assert 'styles.css' in html and 'app.js' in html, 'static assets are not linked'
+          print('content checks passed')
+          PY
+      - name: Smoke serve
+        shell: bash
+        run: |
+          python3 -m http.server 4173 >/tmp/recall-rush-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          sleep 1
+          curl --fail --silent http://127.0.0.1:4173/index.html | grep -q 'Recall Rush'
