@@ -16,8 +16,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Verify Chrome
-        run: google-chrome --version
+      - name: Install Korean font and verify Chrome
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y fonts-noto-cjk
+          fc-cache -f
+          google-chrome --version
 
       - name: Build lesson preview
         run: |
