@@ -19,6 +19,16 @@ jobs:
       - name: Verify Chrome
         run: google-chrome --version
 
+      - name: Build lesson preview
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          src = Path('index.html').read_text()
+          marker = '<script src="app.js"></script>'
+          inject = marker + '<script>window.addEventListener("load",()=>setTimeout(()=>document.querySelector("[data-mode=\\"random\\"]").click(),50));</script>'
+          Path('lesson-preview.html').write_text(src.replace(marker, inject, 1))
+          PY
+
       - name: Serve site
         run: |
           python3 -m http.server 8000 > /tmp/recall-rush-http.log 2>&1 &
@@ -34,14 +44,22 @@ jobs:
       - name: Capture desktop and mobile
         run: |
           mkdir -p visual-review
-          google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+          google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=1000 \
             --window-size=1440,1100 \
             --screenshot=visual-review/home-desktop.png \
             http://127.0.0.1:8000/
-          google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+          google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=1000 \
             --window-size=390,844 \
             --screenshot=visual-review/home-mobile.png \
             http://127.0.0.1:8000/
+          google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=1500 \
+            --window-size=1440,1100 \
+            --screenshot=visual-review/lesson-desktop.png \
+            http://127.0.0.1:8000/lesson-preview.html
+          google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=1500 \
+            --window-size=390,844 \
+            --screenshot=visual-review/lesson-mobile.png \
+            http://127.0.0.1:8000/lesson-preview.html
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
