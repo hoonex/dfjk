@@ -1,0 +1,51 @@
+name: Visual Review
+
+on:
+  push:
+    branches:
+      - chore/pages-review-deploy
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Verify Chrome
+        run: google-chrome --version
+
+      - name: Serve site
+        run: |
+          python3 -m http.server 8000 > /tmp/recall-rush-http.log 2>&1 &
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:8000/ >/dev/null; then
+              exit 0
+            fi
+            sleep 0.5
+          done
+          cat /tmp/recall-rush-http.log
+          exit 1
+
+      - name: Capture desktop and mobile
+        run: |
+          mkdir -p visual-review
+          google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+            --window-size=1440,1100 \
+            --screenshot=visual-review/home-desktop.png \
+            http://127.0.0.1:8000/
+          google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+            --window-size=390,844 \
+            --screenshot=visual-review/home-mobile.png \
+            http://127.0.0.1:8000/
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: recall-rush-visual-review
+          path: visual-review/*.png
+          if-no-files-found: error
