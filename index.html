@@ -7,6 +7,11 @@
   <meta name="description" content="영어 스피킹 수행평가를 위한 랜덤 5문제 단순 암기 연습" />
   <title>Recall Rush — Speaking Practice</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    @media (max-width: 600px) {
+      .hero-copy h1 { font-size: clamp(32px, 9.2vw, 40px); word-break: keep-all; }
+    }
+  </style>
 </head>
 <body>
   <div id="app" class="app-shell">
@@ -24,7 +29,7 @@
 
       <main class="home-main">
         <div class="hero-copy">
-          <p class="eyebrow">내일 수행 대비 · 11문장</p>
+          <p class="eyebrow">스피킹 수행 대비 · 11문장</p>
           <h1 id="homeTitle">질문 앞부분만 보고<br />답을 바로 꺼내는 연습.</h1>
           <p class="hero-description">실전처럼 랜덤 5문제를 풀고, 틀린 문장은 자동으로 한 번 더 만나게 돼.</p>
         </div>
